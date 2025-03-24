@@ -1,0 +1,41 @@
+
+<div style="max-width: 500px; margin: 0 auto; padding: 40px; text-align: center;">
+
+ <h1>Todo List <span><i class="fa-solid fa-plus"></i></span></h1>
+
+  <%= form_with model: @list, local: true do |f| %>
+    <div style="display: flex; margin-top: 20px;">
+      <%= f.text_field :name, placeholder: "Add New Todo", style: "flex: 1; padding: 10px; border-radius: 8px;" %>
+      <%= f.submit "Add", style: "margin-left: 10px; padding: 10px 20px; border-radius: 8px; background-color: #3B82F6; color: white;" %>
+    </div>
+  <% end %>
+
+
+  <div style="margin-top: 30px;">
+    <% @lists.each do |list| %>
+      <div style="display: flex; align-items: center; margin-bottom: 15px; background: #f1f5f9; padding: 10px 15px; border-radius: 10px;">
+
+
+        <span style="font-size: 20px;">
+          <% if list.done? %>
+            <i class="fa-solid fa-square-check"></i>
+          <% else %>
+            <i class="fa-solid fa-square"></i>
+          <% end %>
+        </span>
+
+
+        <% text_style = 'margin-left: 15px; flex-grow: 1; font-size: 18px;' %>
+        <% text_style += ' text-decoration: line-through; color: #aaa;' if list.done? %>
+        <span style="<%= text_style %>">
+          <%= list.name %>
+        </span>
+
+
+        <%= button_to list_path(list), method: :delete, data: { confirm: "Are you sure?" }, style: "background: red; color: white; border: none; padding: 8px; border-radius: 6px;" do %>
+          <%= raw '<i class="fa-solid fa-trash-can"></i>' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

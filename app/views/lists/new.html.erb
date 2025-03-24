@@ -1,0 +1,11 @@
+<h1>Add New To Do</h1>
+
+<%= form_with model: @list, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :done %>
+  <%= f.check_box :done %>
+
+  <%= f.submit "Add" %>
+<% end %>
